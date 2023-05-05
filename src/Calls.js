@@ -1,4 +1,4 @@
-function Call({call}) {
+function Call({call, onShow}) {
   return (
     <div className="row">
       <div className="col s12 m6 l4 xl3">
@@ -13,7 +13,7 @@ function Call({call}) {
             <p><b>Last Update:</b> {call.eventTimeStamp?.toString()}</p>
           </div>
           <div className="card-action">
-            <a href={`https://www.google.com/search?q=${call.remoteParticipants[0].callerID}`}>Search Remote Caller</a>
+            <a href="#" onClick={onShow}>Search Remote Caller</a>
           </div>
         </div>
       </div>
@@ -21,13 +21,13 @@ function Call({call}) {
   )
 }
 
-function Calls({calls}) {
+function Calls({calls, onShow}) {
   return (
     <div>
       <h2>Current Calls</h2>
       <div>
         {calls.map((call) => (
-          <Call call={call} key={call.id} />
+          <Call call={call} key={call.id} onShow={onShow} />
         ))}
       </div>
     </div>

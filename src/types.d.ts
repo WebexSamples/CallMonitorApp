@@ -36,3 +36,42 @@
  * @property {boolean} isMuted - Whether the participant is currently muted or not.
  * @property {string} name - The name of the participant.
  */
+
+/**
+ * Customer object with contact and demographic information
+ * @typedef {Object} Customer
+ * @property {string} id - Unique identifier for the customer.
+ * @property {string} firstName - First name of the customer.
+ * @property {string} lastName - Last name of the customer.
+ * @property {string} email - Email address of the customer.
+ * @property {string} phone - Phone number of the customer.
+ * @property {Object} address - Address of the customer.
+ * @property {string} address.line1 - First line of the customer's address.
+ * @property {string} address.line2 - Second line of the customer's address.
+ * @property {string} address.city - City of the customer's address.
+ * @property {string} address.state - State of the customer's address.
+ * @property {string} address.zip - ZIP code of the customer's address.
+ * @property {string} notes - Additional notes about the customer.
+ * @property {string} createdAt - Date and time the customer was created in ISO format.
+ * @property {string} updatedAt - Date and time the customer was last updated in ISO format.
+ *
+ * @example
+ * // Example usage:
+ * const customer = {
+ *   id: "12345",
+ *   firstName: "John",
+ *   lastName: "Doe",
+ *   email: "johndoe@example.com",
+ *   phone: "+1 555-555-5555",
+ *   address: {
+ *     line1: "123 Main St",
+ *     line2: "",
+ *     city: "Anytown",
+ *     state: "CA",
+ *     zip: "12345"
+ *   },
+ *   notes: "This customer is interested in our premium plan",
+ *   createdAt: "2022-01-01T12:00:00.000Z",
+ *   updatedAt: "2022-02-15T09:30:00.000Z"
+ * };
+ */

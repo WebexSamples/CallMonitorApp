@@ -1,5 +1,6 @@
 /* global webex */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import M from 'materialize-css';
 
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
@@ -8,11 +9,14 @@ import './App.css';
 import Calls from './Calls';
 import Events from './Events';
 import Simulate from './Simulate';
+import Customer from './Customer';
 
 function App() {
   const [calls, setCalls] = useState([]);
   const [callEvents, setCallEvents] = useState([]);
   const [webexApp, setWebexApp] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const modalRef = useRef(null);
 
   function handleNewCallEvent(callData) {
     const callEventData = {
@@ -45,6 +49,15 @@ function App() {
     });
   }
 
+  // Make sure the modal element exists before performing an action on it
+  useEffect(() => {
+    if (modalRef.current && showModal) {
+      const instance = M.Modal.init(modalRef.current, {});
+      instance.open();
+    }
+  }, [modalRef, showModal]);
+
+  // Initialize Webex EA SDK
   useEffect(() => {
     async function initializeWebex() {
       const app = new webex.Application();
@@ -67,21 +80,29 @@ function App() {
     // Create simulated call event
     const call = {
       callType: "Placed",
-      "id": Date.now(),
-      "localParticipant":{
-        "callerID":"",
-        "isMuted":true,
-        "name":"You"
+      id: Date.now(),
+      localParticipant: {
+        callerID: "",
+        isMuted: true,
+        name: "You"
       },
-      "remoteParticipants":[
+      remoteParticipants: [
         {
-          "callerID":number,
-          "name":"Simulated Caller"
+          callerID: number,
+          name: "Simulated Caller"
         }
       ],
-      "state":"Started"
+      state: "Started"
     };
     handleNewCallEvent(call);
+  }
+
+  function handleShowModal() {
+    setShowModal(true);
+  }
+
+  function handleHideModal() {
+    setShowModal(false);
   }
 
   return (
@@ -94,7 +115,7 @@ function App() {
       <div className="section no-pad-bot" id="index-banner">
         <div className="container">
           <div className="row center">
-            <Calls calls={calls} />
+            <Calls calls={calls} onShow={handleShowModal} />
           </div>
         </div>
       </div>
@@ -118,6 +139,16 @@ function App() {
           </div>
         </div>
       </div>
+      {showModal && (
+        <div id="customer-modal" className="modal" ref={modalRef}>
+          <div className="modal-content">
+            <Customer />
+          </div>
+          <div className="modal-footer">
+            <button onClick={handleHideModal} className="modal-close waves-effect waves-green btn-flat">Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
