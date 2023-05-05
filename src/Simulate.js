@@ -24,9 +24,9 @@ export default function Simulate({onClick}) {
         </div>
       </div>
       <div className="card-action">
-        <a href="#" className="waves-effect waves-light btn" onClick={handleSubmit}>
+        <button className="waves-effect waves-light btn" onClick={handleSubmit}>
           Submit
-        </a>
+        </button>
       </div>
     </div>
   );

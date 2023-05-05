@@ -13,7 +13,9 @@ function Call({call, onShow}) {
             <p><b>Last Update:</b> {call.eventTimeStamp?.toString()}</p>
           </div>
           <div className="card-action">
-            <a href="#" onClick={onShow}>Search Remote Caller</a>
+            <button className="waves-effect waves-light btn" onClick={onShow}>
+              Search Remote Caller
+            </button>
           </div>
         </div>
       </div>
