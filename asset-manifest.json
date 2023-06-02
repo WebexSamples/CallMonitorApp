@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/CallMonitorApp/static/css/main.0b057ee6.css",
-    "main.js": "/CallMonitorApp/static/js/main.9b9b0f89.js",
+    "main.css": "/CallMonitorApp/static/css/main.438bee1e.css",
+    "main.js": "/CallMonitorApp/static/js/main.dd8bf258.js",
     "static/js/787.af25d999.chunk.js": "/CallMonitorApp/static/js/787.af25d999.chunk.js",
     "index.html": "/CallMonitorApp/index.html",
-    "main.0b057ee6.css.map": "/CallMonitorApp/static/css/main.0b057ee6.css.map",
-    "main.9b9b0f89.js.map": "/CallMonitorApp/static/js/main.9b9b0f89.js.map",
+    "main.438bee1e.css.map": "/CallMonitorApp/static/css/main.438bee1e.css.map",
+    "main.dd8bf258.js.map": "/CallMonitorApp/static/js/main.dd8bf258.js.map",
     "787.af25d999.chunk.js.map": "/CallMonitorApp/static/js/787.af25d999.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0b057ee6.css",
-    "static/js/main.9b9b0f89.js"
+    "static/css/main.438bee1e.css",
+    "static/js/main.dd8bf258.js"
   ]
 }
