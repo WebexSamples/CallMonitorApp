@@ -1,0 +1,56 @@
+.call-state-flow {
+  margin-top: 16px;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: #eee;
+}
+
+.progress-segment {
+  height: 100%;
+  width: 12.5%;
+  display: inline-block;
+}
+
+.segment-started {
+  background-color: #ff9800;
+}
+
+.segment-connecting {
+  background-color: #ffc107;
+}
+
+.segment-connected {
+  background-color: #4caf50;
+}
+
+.segment-disconnecting {
+  background-color: #f44336;
+}
+
+.segment-disconnected {
+  background-color: #9e9e9e;
+}
+
+.segment-rejected {
+  background-color: #e91e63;
+}
+
+.segment-hold {
+  background-color: #9c27b0;
+}
+
+.segment-ended {
+  background-color: #607d8b;
+}
+
+.progress-segment.active {
+  background-color: #2196f3;
+}
+
+.state-label {
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+}
