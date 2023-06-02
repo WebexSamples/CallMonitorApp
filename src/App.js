@@ -76,7 +76,7 @@ function App() {
     }
   }, [webexApp]);
 
-  function handleSimulate(number) {
+  function handleSimulate(number, callState) {
     // Create simulated call event
     const call = {
       callType: "Placed",
@@ -92,7 +92,7 @@ function App() {
           name: "Simulated Caller"
         }
       ],
-      state: "Started"
+      state: callState || "Started"
     };
     handleNewCallEvent(call);
   }
