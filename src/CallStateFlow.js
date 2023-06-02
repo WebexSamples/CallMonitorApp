@@ -35,10 +35,10 @@ const CallStateFlow = ({ callState }) => {
         <div className={getSegmentClass('Started')}></div>
         <div className={getSegmentClass('Connecting')}></div>
         <div className={getSegmentClass('Connected')}></div>
+        <div className={getSegmentClass('Hold')}></div>
         <div className={getSegmentClass('Disconnecting')}></div>
         <div className={getSegmentClass('Disconnected')}></div>
         <div className={getSegmentClass('Rejected')}></div>
-        <div className={getSegmentClass('Hold')}></div>
         <div className={getSegmentClass('Ended')}></div>
       </div>
       <div className="state-label">{getStateLabel(callState)}</div>
