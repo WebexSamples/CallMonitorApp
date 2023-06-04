@@ -1,7 +1,7 @@
 function Events({events}) {
     return (
         <div>
-            <h2>Calling Events</h2>
+            <h4>Calling Events</h4>
             <ul className="collection">
                 {events.map((e, index) => (
                     <li className="collection-item" key={index}>

@@ -109,7 +109,7 @@ function App() {
     <div className="App">
       <nav>
         <div className="nav-wrapper">
-          <a href="/" className="brand-logo">Webex Calling Status</a>
+          <a href="/" className="brand-logo">Webex Calling Sidebar App</a>
         </div>
       </nav>
       <div className="section no-pad-bot" id="index-banner">
@@ -122,11 +122,9 @@ function App() {
       <div className="container">
         <div className="section">
           <div className="row">
-            <div className="col s12 m4">
+            <div className="col s12">
               <Events events={callEvents} />
             </div>
-            <div className="col s12 m4"></div>
-            <div className="col s12 m4"></div>
           </div>
         </div>
       </div>

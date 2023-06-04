@@ -3,7 +3,7 @@ import CallStateFlow from "./CallStateFlow";
 function Call({call, onShow}) {
   return (
     <div className="row">
-      <div className="col s12 m6 l4 xl3">
+      <div className="col s12">
         <div className="card">
           <div className="card-content">
             <span className="card-title">Call Information</span>
@@ -30,7 +30,7 @@ function Call({call, onShow}) {
 function Calls({calls, onShow}) {
   return (
     <div>
-      <h2>Current Calls</h2>
+      <h3>Current Calls</h3>
       <div>
         {calls.map((call) => (
           <Call call={call} key={call.id} onShow={onShow} />
