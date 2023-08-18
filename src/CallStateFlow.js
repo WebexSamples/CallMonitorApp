@@ -9,21 +9,21 @@ const CallStateFlow = ({ callState }) => {
   const getStateLabel = (callState) => {
     switch (callState) {
       case 'Started':
-        return 'Call Started';
+        return 'Started';
       case 'Connecting':
         return 'Connecting...';
       case 'Connected':
-        return 'Call Connected';
+        return 'Connected';
       case 'Disconnecting':
         return 'Disconnecting...';
       case 'Disconnected':
-        return 'Call Disconnected';
+        return 'Disconnected';
       case 'Rejected':
-        return 'Call Rejected';
+        return 'Rejected';
       case 'Hold':
-        return 'Call on Hold';
+        return 'on Hold';
       case 'Ended':
-        return 'Call Ended';
+        return 'Ended';
       default:
         return '';
     }

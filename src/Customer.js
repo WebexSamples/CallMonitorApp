@@ -1,36 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import {faker} from '@faker-js/faker';
-
-export default function Customer() {
-  const [customer, setCustomer] = useState(null);
-
-  useEffect(() => {
-    const fakeCustomer = {
-      id: faker.datatype.uuid(),
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      email: faker.internet.email(),
-      phone: faker.phone.number(),
-      address: {
-        line1: faker.address.streetAddress(),
-        line2: "",
-        city: faker.address.city(),
-        state: faker.address.stateAbbr(),
-        zip: faker.address.zipCode()
-      },
-      notes: faker.lorem.sentence(),
-      profilePicture: faker.image.avatar(),
-      createdAt: faker.date.past().toISOString(),
-      updatedAt: faker.date.recent().toISOString()
-    };
-
-    setCustomer(fakeCustomer);
-  }, []);
-
-  if (!customer) {
-    return <div>Loading...</div>;
-  }
-
+export default function Customer({customer}) {
   return (
     <div className="card">
       <div className="card-content">

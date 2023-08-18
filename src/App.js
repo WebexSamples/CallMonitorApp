@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import M from 'materialize-css';
 
+import generateCustomer from './generateCustomer';
+
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 import './App.css';
@@ -17,6 +19,7 @@ function App() {
   const [webexApp, setWebexApp] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showSimulateModal, setShowSimulateModal] = useState(false);
+  const [modalCustomer, setModalCustomer] = useState();
   const modalRef = useRef(null);
   const simulateModalRef = useRef(null);
 
@@ -25,6 +28,7 @@ function App() {
       ...callData,
       eventTimeStamp: new Date()
     }
+
     // Add Call Event to Event collection
     setCallEvents((prevEvents) => [callEventData, ...prevEvents]);
 
@@ -36,7 +40,11 @@ function App() {
         // Update existing Call
         updatedCalls = prevCalls.map(call => {
           if (call.id === callEventData.id) {
-            return callEventData;
+            // Merge Call Event into existing Call record
+            return {
+              ...call,
+              ...callEventData
+            };
           }
           return call;
         });
@@ -44,6 +52,11 @@ function App() {
 
       if (!objToUpdate) {
         updatedCalls = [...prevCalls];
+        if (!callEventData.customer) {
+          // Add Fake Customer Data
+          callEventData.customer = generateCustomer();
+        }
+
         updatedCalls.push(callEventData);
       }
 
@@ -51,7 +64,7 @@ function App() {
     });
   }
 
-  // Make sure the modal element exists before performing an action on it
+  // Make sure the customer modal element exists before performing an action on it
   useEffect(() => {
     if (modalRef.current && showModal) {
       const instance = M.Modal.init(modalRef.current, {});
@@ -59,7 +72,7 @@ function App() {
     }
   }, [modalRef, showModal]);
 
-  // Make sure the modal element exists before performing an action on it
+  // Make sure the simulate modal element exists before performing an action on it
   useEffect(() => {
     if (simulateModalRef.current && showSimulateModal) {
       const instance = M.Modal.init(simulateModalRef.current, {});
@@ -113,7 +126,8 @@ function App() {
     handleHideSimulateModal();
   }
 
-  function handleShowModal() {
+  function handleShowModal(customer) {
+    setModalCustomer(customer);
     setShowModal(true);
   }
 
@@ -151,7 +165,7 @@ function App() {
       {showModal && (
         <div id="customer-modal" className="modal" ref={modalRef}>
           <div className="modal-content">
-            <Customer />
+            <Customer customer={modalCustomer} />
           </div>
           <div className="modal-footer">
             <button onClick={handleHideModal} className="modal-close waves-effect waves-green btn-flat">Close</button>
