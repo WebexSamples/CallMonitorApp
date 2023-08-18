@@ -1,4 +1,3 @@
-/* global webex */
 import { useEffect, useRef, useState } from 'react';
 import M from 'materialize-css';
 
@@ -60,7 +59,12 @@ function App() {
   // Initialize Webex EA SDK
   useEffect(() => {
     async function initializeWebex() {
-      const app = new webex.Application();
+      const config = {
+        logs: {
+          logLevel: 3   //INFO: 0, WARN: 1, ERROR: 2, SILENT: 3
+        }
+      }
+      const app = new window.webex.Application(config);
       setWebexApp(app);
       await app.onReady();
       console.log('Webex SDK Ready');
