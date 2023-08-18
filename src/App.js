@@ -5,6 +5,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 import './App.css';
 
+import NavBar from './NavBar';
 import Calls from './Calls';
 import Events from './Events';
 import Simulate from './Simulate';
@@ -111,11 +112,7 @@ function App() {
 
   return (
     <div className="App">
-      <nav>
-        <div className="nav-wrapper">
-          <a href="/" className="brand-logo">Webex Calling Sidebar App</a>
-        </div>
-      </nav>
+      <NavBar webexApp={webexApp} />
       <div className="section no-pad-bot" id="index-banner">
         <div className="container">
           <div className="row center">
