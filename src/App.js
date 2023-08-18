@@ -1,4 +1,3 @@
-/* global webex */
 import { useEffect, useRef, useState } from 'react';
 import M from 'materialize-css';
 
@@ -6,6 +5,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 import './App.css';
 
+import NavBar from './NavBar';
 import Calls from './Calls';
 import Events from './Events';
 import Simulate from './Simulate';
@@ -60,7 +60,12 @@ function App() {
   // Initialize Webex EA SDK
   useEffect(() => {
     async function initializeWebex() {
-      const app = new webex.Application();
+      const config = {
+        logs: {
+          logLevel: 3   //INFO: 0, WARN: 1, ERROR: 2, SILENT: 3
+        }
+      }
+      const app = new window.webex.Application(config);
       setWebexApp(app);
       await app.onReady();
       console.log('Webex SDK Ready');
@@ -107,11 +112,7 @@ function App() {
 
   return (
     <div className="App">
-      <nav>
-        <div className="nav-wrapper">
-          <a href="/" className="brand-logo">Webex Calling Sidebar App</a>
-        </div>
-      </nav>
+      <NavBar webexApp={webexApp} />
       <div className="section no-pad-bot" id="index-banner">
         <div className="container">
           <div className="row center">
