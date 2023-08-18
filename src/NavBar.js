@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import M from 'materialize-css';
 
-function NavBar({webexApp}) {
+function NavBar({webexApp, onSimulate}) {
   useEffect(() => {
     // Initialize the Dropdown
     const dropdowns = document.querySelectorAll('.dropdown-trigger');
@@ -12,6 +12,13 @@ function NavBar({webexApp}) {
     <nav>
       <div className="nav-wrapper">
         <a href="/" className="brand-logo">Webex Calling Sidebar App</a>
+        <ul className="right valign-wrapper">
+          <li>
+            <a onClick={onSimulate} className="waves-effect waves-light btn valign-wrapper">
+              Simulate <i className="material-icons right">phone</i>
+            </a>
+          </li>
+        </ul>
         <ul className="right valign-wrapper" style={{ display: 'flex', height: '100%' }}>
           <li>
             <button

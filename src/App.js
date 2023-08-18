@@ -16,7 +16,9 @@ function App() {
   const [callEvents, setCallEvents] = useState([]);
   const [webexApp, setWebexApp] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showSimulateModal, setShowSimulateModal] = useState(false);
   const modalRef = useRef(null);
+  const simulateModalRef = useRef(null);
 
   function handleNewCallEvent(callData) {
     const callEventData = {
@@ -56,6 +58,14 @@ function App() {
       instance.open();
     }
   }, [modalRef, showModal]);
+
+  // Make sure the modal element exists before performing an action on it
+  useEffect(() => {
+    if (simulateModalRef.current && showSimulateModal) {
+      const instance = M.Modal.init(simulateModalRef.current, {});
+      instance.open();
+    }
+  }, [simulateModalRef, showSimulateModal]);
 
   // Initialize Webex EA SDK
   useEffect(() => {
@@ -100,6 +110,7 @@ function App() {
       state: callState || "Started"
     };
     handleNewCallEvent(call);
+    handleHideSimulateModal();
   }
 
   function handleShowModal() {
@@ -110,9 +121,17 @@ function App() {
     setShowModal(false);
   }
 
+  function handleToggleSimulateModal() {
+    setShowSimulateModal(!showSimulateModal);
+  }
+
+  function handleHideSimulateModal() {
+    setShowSimulateModal(false);
+  }
+
   return (
     <div className="App">
-      <NavBar webexApp={webexApp} />
+      <NavBar webexApp={webexApp} onSimulate={handleToggleSimulateModal} />
       <div className="section no-pad-bot" id="index-banner">
         <div className="container">
           <div className="row center">
@@ -129,15 +148,6 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="container">
-        <div className="section">
-          <div className="row">
-            <div className="col s12 m4">
-              <Simulate onClick={handleSimulate} />
-            </div>
-          </div>
-        </div>
-      </div>
       {showModal && (
         <div id="customer-modal" className="modal" ref={modalRef}>
           <div className="modal-content">
@@ -147,6 +157,16 @@ function App() {
             <button onClick={handleHideModal} className="modal-close waves-effect waves-green btn-flat">Close</button>
           </div>
         </div>
+      )}
+      {showSimulateModal && (
+        <div id="simulate-modal" className="modal" ref={simulateModalRef}>
+          <div className="modal-content">
+            <Simulate onClick={handleSimulate} />
+          </div>
+          <div className="modal-footer">
+            <button onClick={handleHideSimulateModal} className="modal-close waves-effect waves-green btn-flat">Close</button>
+          </div>
+      </div>
       )}
     </div>
   );
