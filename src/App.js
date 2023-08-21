@@ -17,6 +17,7 @@ function App() {
   const [calls, setCalls] = useState([]);
   const [callEvents, setCallEvents] = useState([]);
   const [webexApp, setWebexApp] = useState(false);
+  const [webexAppUser, setWebexAppUser] = useState({displayName: '', email: '', orgId: ''});
   const [showModal, setShowModal] = useState(false);
   const [showSimulateModal, setShowSimulateModal] = useState(false);
   const [modalCustomer, setModalCustomer] = useState();
@@ -97,6 +98,7 @@ function App() {
       app.on('sidebar:callStateChanged', (callData) => {
         handleNewCallEvent(callData);
       });
+      setWebexAppUser(app.application.states.user);
     }
 
     if (!webexApp) {
@@ -145,7 +147,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar webexApp={webexApp} onSimulate={handleToggleSimulateModal} />
+      <NavBar userProfile={webexAppUser} onSimulate={handleToggleSimulateModal} />
       <div className="section no-pad-bot" id="index-banner">
         <div className="container">
           <div className="row center">

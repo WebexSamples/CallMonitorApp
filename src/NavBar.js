@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import M from 'materialize-css';
 
-function NavBar({webexApp, onSimulate}) {
+function NavBar({userProfile, onSimulate}) {
   useEffect(() => {
     // Initialize the Dropdown
     const dropdowns = document.querySelectorAll('.dropdown-trigger');
@@ -34,17 +35,26 @@ function NavBar({webexApp, onSimulate}) {
       </div><ul id="profile-dropdown" className="dropdown-content">
         {/* Dropdown Content */}
         <li>
-          <span>Username: {webexApp?.application?.states?.user?.displayName}</span>
+          <span>Username: {userProfile.displayName}</span>
         </li>
         <li>
-          <span>Email: {webexApp?.application?.states?.user?.email}</span>
+          <span>Email: {userProfile.email}</span>
         </li>
         <li>
-          <span>Org ID: {webexApp?.application?.states?.user?.orgId}</span>
+          <span>Org ID: {userProfile.orgId}</span>
         </li>
       </ul>
     </nav>
   );
 }
+
+NavBar.propTypes = {
+  onSimulate: PropTypes.func.isRequired,
+  userProfile: PropTypes.shape({
+    displayName: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    orgId: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default NavBar;
