@@ -90,21 +90,44 @@ function App() {
         }
       }
       const app = new window.webex.Application(config);
-      setWebexApp(app);
-      await app.onReady();
-      console.log('Webex SDK Ready');
-      await app.listen();
-      console.log('Adding call listener');
-      app.on('sidebar:callStateChanged', (callData) => {
-        handleNewCallEvent(callData);
-      });
-      setWebexAppUser(app.application.states.user);
+      try {
+        await app.onReady();
+        console.log('Webex SDK Ready');
+        await app.listen();
+        console.log('Adding call listener');
+        app.on('sidebar:callStateChanged', (callData) => {
+          handleNewCallEvent(callData);
+        });
+
+        setWebexApp(app);
+        setWebexAppUser(app.application.states.user);
+      } catch (error) {
+        console.error('Error initializing Webex:', error);
+      }
     }
 
     if (!webexApp) {
       initializeWebex();
     }
-  }, [webexApp]);
+  });
+
+  // Monitor the Calls array and update the badge to active calls
+  useEffect(() => {
+    if (!webexApp) {
+      return;
+    }
+    // Set badge based on # of active calls
+    const activeCalls = calls.filter(call => call.state !== 'Ended');
+    const activeCallsCount = activeCalls.length;
+    webexApp?.context?.getSidebar().then((sidebar) => {
+      console.log(`Setting badge count to: ${activeCallsCount}`);
+      // Badges
+      sidebar.showBadge({
+        badgeType: 'count',
+        count: activeCallsCount
+      });
+    });
+  }, [calls, webexApp]);
 
   function handleSimulate(number, callState) {
     // Create simulated call event
