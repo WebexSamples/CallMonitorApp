@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import M from 'materialize-css';
 
-function NavBar({userProfile, onSimulate}) {
+function NavBar({ userProfile, onSimulate }) {
   useEffect(() => {
     // Initialize the Dropdown
     const dropdowns = document.querySelectorAll('.dropdown-trigger');
@@ -12,15 +12,23 @@ function NavBar({userProfile, onSimulate}) {
   return (
     <nav>
       <div className="nav-wrapper">
-        <a href="/" className="brand-logo">Webex Calling Sidebar App</a>
+        <a href="/" className="brand-logo">
+          Webex Calling Sidebar App
+        </a>
         <ul className="right valign-wrapper">
           <li>
-            <a onClick={onSimulate} className="waves-effect waves-light btn valign-wrapper">
+            <a
+              onClick={onSimulate}
+              className="waves-effect waves-light btn valign-wrapper"
+            >
               Simulate <i className="material-icons right">phone</i>
             </a>
           </li>
         </ul>
-        <ul className="right valign-wrapper" style={{ display: 'flex', height: '100%' }}>
+        <ul
+          className="right valign-wrapper"
+          style={{ display: 'flex', height: '100%' }}
+        >
           <li>
             <button
               className="dropdown-trigger btn-flat valign-wrapper"
@@ -32,7 +40,8 @@ function NavBar({userProfile, onSimulate}) {
             </button>
           </li>
         </ul>
-      </div><ul id="profile-dropdown" className="dropdown-content">
+      </div>
+      <ul id="profile-dropdown" className="dropdown-content">
         {/* Dropdown Content */}
         <li>
           <span>Username: {userProfile.displayName}</span>

@@ -17,7 +17,11 @@ function App() {
   const [calls, setCalls] = useState([]);
   const [callEvents, setCallEvents] = useState([]);
   const [webexApp, setWebexApp] = useState(false);
-  const [webexAppUser, setWebexAppUser] = useState({displayName: '', email: '', orgId: ''});
+  const [webexAppUser, setWebexAppUser] = useState({
+    displayName: '',
+    email: '',
+    orgId: '',
+  });
   const [showModal, setShowModal] = useState(false);
   const [showSimulateModal, setShowSimulateModal] = useState(false);
   const [modalCustomer, setModalCustomer] = useState();
@@ -27,24 +31,24 @@ function App() {
   function handleNewCallEvent(callData) {
     const callEventData = {
       ...callData,
-      eventTimeStamp: new Date()
-    }
+      eventTimeStamp: new Date(),
+    };
 
     // Add Call Event to Event collection
     setCallEvents((prevEvents) => [callEventData, ...prevEvents]);
 
     // Update Call Data in Calls collection
     setCalls((prevCalls) => {
-      const objToUpdate = prevCalls.find(obj => obj.id === callEventData.id);
+      const objToUpdate = prevCalls.find((obj) => obj.id === callEventData.id);
       let updatedCalls;
       if (objToUpdate) {
         // Update existing Call
-        updatedCalls = prevCalls.map(call => {
+        updatedCalls = prevCalls.map((call) => {
           if (call.id === callEventData.id) {
             // Merge Call Event into existing Call record
             return {
               ...call,
-              ...callEventData
+              ...callEventData,
             };
           }
           return call;
@@ -86,9 +90,9 @@ function App() {
     async function initializeWebex() {
       const config = {
         logs: {
-          logLevel: 3   //INFO: 0, WARN: 1, ERROR: 2, SILENT: 3
-        }
-      }
+          logLevel: 3, //INFO: 0, WARN: 1, ERROR: 2, SILENT: 3
+        },
+      };
       const app = new window.webex.Application(config);
       try {
         await app.onReady();
@@ -117,14 +121,14 @@ function App() {
       return;
     }
     // Set badge based on # of active calls
-    const activeCalls = calls.filter(call => call.state !== 'Ended');
+    const activeCalls = calls.filter((call) => call.state !== 'Ended');
     const activeCallsCount = activeCalls.length;
     webexApp?.context?.getSidebar().then((sidebar) => {
       console.log(`Setting badge count to: ${activeCallsCount}`);
       // Badges
       sidebar.showBadge({
         badgeType: 'count',
-        count: activeCallsCount
+        count: activeCallsCount,
       });
     });
   }, [calls, webexApp]);
@@ -132,20 +136,20 @@ function App() {
   function handleSimulate(number, callState) {
     // Create simulated call event
     const call = {
-      callType: "Placed",
+      callType: 'Placed',
       id: Date.now(),
       localParticipant: {
-        callerID: "",
+        callerID: '',
         isMuted: true,
-        name: "You"
+        name: 'You',
       },
       remoteParticipants: [
         {
           callerID: number,
-          name: "Simulated Caller"
-        }
+          name: 'Simulated Caller',
+        },
       ],
-      state: callState || "Started"
+      state: callState || 'Started',
     };
     handleNewCallEvent(call);
     handleHideSimulateModal();
@@ -170,7 +174,10 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar userProfile={webexAppUser} onSimulate={handleToggleSimulateModal} />
+      <NavBar
+        userProfile={webexAppUser}
+        onSimulate={handleToggleSimulateModal}
+      />
       <div className="section no-pad-bot" id="index-banner">
         <div className="container">
           <div className="row center">
@@ -193,7 +200,12 @@ function App() {
             <Customer customer={modalCustomer} />
           </div>
           <div className="modal-footer">
-            <button onClick={handleHideModal} className="modal-close waves-effect waves-green btn-flat">Close</button>
+            <button
+              onClick={handleHideModal}
+              className="modal-close waves-effect waves-green btn-flat"
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
@@ -203,9 +215,14 @@ function App() {
             <Simulate onClick={handleSimulate} />
           </div>
           <div className="modal-footer">
-            <button onClick={handleHideSimulateModal} className="modal-close waves-effect waves-green btn-flat">Close</button>
+            <button
+              onClick={handleHideSimulateModal}
+              className="modal-close waves-effect waves-green btn-flat"
+            >
+              Close
+            </button>
           </div>
-      </div>
+        </div>
       )}
     </div>
   );

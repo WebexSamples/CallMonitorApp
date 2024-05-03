@@ -3,7 +3,9 @@ import './CallStateFlow.css'; // Import the CSS file for styling
 
 const CallStateFlow = ({ callState }) => {
   const getSegmentClass = (segmentState) => {
-    return callState === segmentState ? 'progress-segment active' : 'progress-segment';
+    return callState === segmentState
+      ? 'progress-segment active'
+      : 'progress-segment';
   };
 
   const getStateLabel = (callState) => {
