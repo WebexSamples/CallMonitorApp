@@ -1,8 +1,7 @@
 import M from 'materialize-css';
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-export default function Simulate({onClick}) {
-
+export default function Simulate({ onClick }) {
   useEffect(() => {
     // Initialize Materialize select dropdown
     const options = {};
@@ -32,14 +31,26 @@ export default function Simulate({onClick}) {
         <span className="card-title">Simulate Incoming Call</span>
         <div className="row">
           <div className="input-field col s12">
-            <input id="phone" type="tel" className="validate" value={number} onChange={handleNumberChange} />
+            <input
+              id="phone"
+              type="tel"
+              className="validate"
+              value={number}
+              onChange={handleNumberChange}
+            />
             <label htmlFor="phone">Phone Number</label>
           </div>
         </div>
         <div className="row">
           <div className="input-field col s12">
-            <select id="callState" value={callState} onChange={handleCallStateChange}>
-              <option value="" disabled>Select a state</option>
+            <select
+              id="callState"
+              value={callState}
+              onChange={handleCallStateChange}
+            >
+              <option value="" disabled>
+                Select a state
+              </option>
               <option value="Started">Started</option>
               <option value="Connecting">Connecting</option>
               <option value="Connected">Connected</option>
